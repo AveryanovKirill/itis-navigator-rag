@@ -4,6 +4,9 @@ $taskRoot = Split-Path -Parent $PSScriptRoot
 Push-Location $taskRoot
 try {
     if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'Нужен Node.js >=22.13. Основной Python RAG не требует Node.' }
+    $nodeVersion = [version]((& node --version).Trim().TrimStart('v'))
+    if ($nodeVersion -lt [version]'22.13') { throw 'Для расписания нужен Node.js >=22.13. Основной RAG работает без него.' }
+    if (-not (Get-Command npm.cmd -ErrorAction SilentlyContinue)) { throw 'Не найден npm.cmd. Установите Node.js с npm; это необязательно для поиска документов.' }
     if (-not (Test-Path 'reference/MCP-Demo/package.json')) {
         git clone https://github.com/GreenSLA/MCP-Demo.git reference/MCP-Demo
         if ($LASTEXITCODE -ne 0) { throw 'Не удалось клонировать MCP-Demo' }

@@ -36,7 +36,7 @@ def prepare(fetch_official=False, download_only=False, rebuild=False):
         if document_paths(ROOT / "docs"):
             raise ValueError("docs/ уже содержит документы. Автоматическая загрузка не перезаписывает их; выберите новую копию проекта для обновления корпуса.")
         from .official import import_official
-        import_official()
+        import_official(reuse_downloads=True)
     if not download_only and not document_paths(ROOT / "docs"):
         raise ValueError("В docs/ нет документов. Сохраните разрешённые UTF-8 .txt/.md и метаданные data/sources.json либо выполните python -m src.bootstrap --fetch-official. Полные копии материалов КФУ не распространяются с кодом.")
     embedder = LocalEmbeddings()

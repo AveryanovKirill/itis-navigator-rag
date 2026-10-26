@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$Python = '',
     [switch]$FetchOfficial,
     [switch]$SkipDependencies
@@ -15,9 +15,9 @@ try {
             & $Python -m venv (Join-Path $taskRoot '.venv')
         } elseif (Get-Command py -ErrorAction SilentlyContinue) {
             $selected = $null
+            $availableVersions = (& py -0p 2>$null | Out-String)
             foreach ($version in @('-3.12', '-3.13', '-3.11')) {
-                & py $version -c 'import sys; assert sys.version_info >= (3,11)' 2>$null
-                if ($LASTEXITCODE -eq 0) { $selected=$version; break }
+                if ($availableVersions -match ([regex]::Escape($version) + '(?:-|\s)')) { $selected=$version; break }
             }
             if (-not $selected) { throw 'Установите Python 3.12 или 3.13 с python.org, затем повторите setup.ps1.' }
             & py $selected -m venv (Join-Path $taskRoot '.venv')

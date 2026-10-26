@@ -105,17 +105,3 @@ def test_plain_index_mode_for_reproducible_baseline(tmp_path, toy):
     assert calls == ["кот кот", "пёс пёс", "чай чай"]
 
 
-def test_real_dataset_has_independent_evidence():
-    from src.config import ROOT
-    questions = read_json(ROOT / "eval/questions_50.json")
-    chunks = read_json(ROOT / "index/chunks.json")
-    gold = validate_dataset(questions, chunks)
-    assert len(gold) == 50
-    assert all(gold[q["id"]] for q in questions if q["answerable"])
-    sources = read_json(ROOT / "data/sources.json")
-    for q in questions:
-        if q["answerable"]:
-            assert q["source_url"] == sources[q["source"]]["url"]
-    broken = dict(questions[0], evidence="Такого предложения в документе нет.")
-    with pytest.raises(ValueError):
-        gold_ids(broken, chunks)

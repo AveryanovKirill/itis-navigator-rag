@@ -19,6 +19,12 @@ def pytest_addoption(parser):
     parser.addoption("--run-local-model", action="store_true", help="Проверить настоящую локальную модель и production MCP, нужна загруженная модель")
 
 
+def pytest_configure(config):
+    # pytest --basetemp не создаёт отсутствующий родительский каталог.
+    # Тесты должны запускаться сразу после clone, ещё до скачивания моделей.
+    (config.rootpath / ".cache").mkdir(exist_ok=True)
+
+
 def pytest_collection_modifyitems(config, items):
     if not config.getoption("--run-local-model"):
         for item in items:

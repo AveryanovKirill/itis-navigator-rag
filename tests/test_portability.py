@@ -72,3 +72,19 @@ def test_schedule_absent_dependency_does_not_break_document_server(monkeypatch,t
     monkeypatch.setattr(schedule,"ROOT",tmp_path)
     result=asyncio.run(schedule.get_group_schedule("11-307","понедельник"))
     assert result["status"]=="unavailable" and "setup_schedule" in result["message"]
+
+
+def test_optional_education_page_failure_keeps_five_imported_documents(monkeypatch,tmp_path):
+    import src.official as official
+    import pypdf
+    from types import SimpleNamespace
+    monkeypatch.setattr(official,"ROOT",tmp_path)
+    text="Тестовый текст для проверки импортёра. "*20
+    def fetch(url):
+        if url==official.EDUCATION:raise ValueError("Тестовая недоступность необязательного ресурса")
+        return SimpleNamespace(content=b"TEST_ONLY",text=f'<main><h1>Тест</h1><p>{text}</p></main>')
+    monkeypatch.setattr(official,"fetch",fetch)
+    monkeypatch.setattr(pypdf,"PdfReader",lambda *a:SimpleNamespace(pages=[SimpleNamespace(extract_text=lambda:text)]))
+    official.import_official()
+    assert len(list((tmp_path/"docs").glob("*.txt")))==5
+    assert (tmp_path/"data/sources.json").is_file()
