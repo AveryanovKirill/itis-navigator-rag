@@ -1,0 +1,11 @@
+[project]
+name = "itis-navigator-rag"
+version = "1.0.0"
+description = "Локальный помощник по документам ИТИС КФУ на Python, Qwen3 и MCP"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--basetemp=.cache/pytest"
+markers = ["integration: настоящий MCP subprocess", "local_model: требует загруженной модели"]
