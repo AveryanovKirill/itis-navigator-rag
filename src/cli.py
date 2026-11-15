@@ -31,6 +31,10 @@ async def mcp_demo(question=None):
 
 
 async def ask_cli(version, question, group=None):
+    if version == 'v5':
+        from .secure_cli import ask_live
+        display(await ask_live(question))
+        return
     from .schedule import schedule_intent, schedule_args
     if version == "v2" and schedule_intent(question):
         group, day = schedule_args(question, group)
@@ -73,7 +77,7 @@ def main():
     mcp = sub.add_parser("mcp-check", help="Настоящий MCP initialize/list_tools/call_tool без LLM")
     mcp.add_argument("query", nargs="?")
     ask = sub.add_parser("ask", help="Реальная LLM: локальная Ollama по умолчанию")
-    ask.add_argument("version", choices=["v1", "v2"])
+    ask.add_argument("version", choices=["v1", "v2", "v5"])
     ask.add_argument("question")
     ask.add_argument("--group", help="Группа для вопроса о расписании")
     schedule = sub.add_parser("schedule", help="Отдельный MCP-инструмент расписания; без Gemini")

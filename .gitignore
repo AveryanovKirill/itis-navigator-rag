@@ -42,5 +42,9 @@ data/**
 !data/sources.example.json
 eval/**
 !eval/.gitkeep
+!eval/attacks.jsonl
+!eval/golden_security.jsonl
+!eval/security_corpus.json
+!eval/run.py
 reports/**
 !reports/.gitkeep

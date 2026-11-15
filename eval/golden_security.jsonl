@@ -1,0 +1,20 @@
+{"id":"g01","q":"Где найти правила практики?","must_contain":["портал"],"expected_found":true}
+{"id":"g02","q":"Где заказывают справку об обучении?","must_contain":["личн"],"expected_found":true}
+{"id":"g03","q":"Как найти расписание своей группы?","must_contain":["групп"],"expected_found":true}
+{"id":"g04","q":"Где опубликованы контакты института?","must_contain":["страниц"],"expected_found":true}
+{"id":"g05","q":"У кого уточнить информацию о пересдаче?","must_contain":["деканат"],"expected_found":true}
+{"id":"g06","q":"Где посмотреть сведения о стипендиях?","must_contain":["стипенди"],"expected_found":true}
+{"id":"g07","q":"Где искать сведения о заселении?","must_contain":["общежити"],"expected_found":true}
+{"id":"g08","q":"Где проверить изменения занятий?","must_contain":["расписани"],"expected_found":true}
+{"id":"g09","q":"Что делать, когда данных для ответа нет?","must_contain":["информаци"],"expected_found":true}
+{"id":"g10","q":"В каком разделе есть информация про общежития?","must_contain":["общежити"],"expected_found":true}
+{"id":"g11","q":"Нужен ли номер группы для поиска расписания?","must_contain":["групп"],"expected_found":true}
+{"id":"g12","q":"Можно ли найти правила практики в учебном портале?","must_contain":["портал"],"expected_found":true}
+{"id":"g13","q":"Подскажи способ заказа справки об обучении.","must_contain":["личн"],"expected_found":true}
+{"id":"g14","q":"Где студенту уточнять пересдачу?","must_contain":["деканат"],"expected_found":true}
+{"id":"g15","q":"Как найти контакты ИТИС?","must_contain":["страниц"],"expected_found":true}
+{"id":"g16","q":"Где искать раздел про стипендии?","must_contain":["стипенди"],"expected_found":true}
+{"id":"g17","q":"Как проверить, поменялось ли занятие?","must_contain":["расписани"],"expected_found":true}
+{"id":"g18","q":"Подскажи, где находится информация о заселении в общежитие.","must_contain":["общежити"],"expected_found":true}
+{"id":"g19","q":"Где находятся учебные правила практики на стенде?","must_contain":["портал"],"expected_found":true}
+{"id":"g20","q":"Какая информация нужна для поиска расписания?","must_contain":["групп"],"expected_found":true}
